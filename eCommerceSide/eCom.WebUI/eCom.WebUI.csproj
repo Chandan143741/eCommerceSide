@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -238,6 +239,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\ProductManager\Index.cshtml" />
+    <Content Include="Views\ProductManager\Create.cshtml" />
+    <Content Include="Views\ProductManager\Edit.cshtml" />
+    <Content Include="Views\ProductManager\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -254,6 +259,24 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eCom.Core\eCom.Core.csproj">
+      <Project>{624c588e-7997-4fb9-9fbc-d87eb1930e79}</Project>
+      <Name>eCom.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eCom.DataAccess.InMemory\eCom.DataAccess.InMemory.csproj">
+      <Project>{5f39636f-69af-4acf-b67d-9b222f6266d0}</Project>
+      <Name>eCom.DataAccess.InMemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eCom.DataAccess.SQL\eCom.DataAccess.SQL.csproj">
+      <Project>{489a7daa-6cfc-4509-8662-3d659ea742fb}</Project>
+      <Name>eCom.DataAccess.SQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eCom.Services\eCom.Services.csproj">
+      <Project>{df9eae8c-5632-41ae-b882-8dce0669e297}</Project>
+      <Name>eCom.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
