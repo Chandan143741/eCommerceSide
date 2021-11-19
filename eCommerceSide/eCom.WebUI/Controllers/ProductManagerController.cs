@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using eCom.Core.Models;
+using eCom.Core.ViewModels;
 using eCom.DataAccess.InMemory;
 
 namespace eCom.WebUI.Controllers
@@ -11,11 +12,14 @@ namespace eCom.WebUI.Controllers
     public class ProductManagerController : Controller
     {
         ProductRepository Context;
+        ProductCategoryRepository categoryRepository;
 
         public ProductManagerController()
         {
             Context = new ProductRepository();
+            categoryRepository = new ProductCategoryRepository();
         }
+
         // GET: ProductManager
         public ActionResult Index()
         {
@@ -25,8 +29,10 @@ namespace eCom.WebUI.Controllers
 
         public ActionResult Create()
         {
-            Product product = new Product();
-            return View(product);
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
+            viewModel.Product = new Product();
+            viewModel.ProductCategories = categoryRepository.Collection();
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -55,7 +61,10 @@ namespace eCom.WebUI.Controllers
             }
             else
             {
-                return View(product);
+                ProductManagerViewModel viewModel = new ProductManagerViewModel();
+                viewModel.Product = product;
+                viewModel.ProductCategories = categoryRepository.Collection();
+                return View(viewModel);
             }
         }
 
