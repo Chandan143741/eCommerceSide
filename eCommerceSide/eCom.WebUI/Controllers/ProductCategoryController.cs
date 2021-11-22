@@ -10,11 +10,11 @@ namespace eCom.WebUI.Controllers
 {
     public class ProductCategoryController : Controller
     {
-        ProductCategoryRepository Context;
+        InMemoryRepository<ProductCategory> Context;
 
         public ProductCategoryController()
         {
-            Context = new ProductCategoryRepository();
+            Context = new InMemoryRepository<ProductCategory>();
         }
         // GET: ProductManager
         public ActionResult Index()

@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace eCom.Core.Models
 {
-    public class Product
+    public class Product : BaseEntity
     {
-        public string Id { get; set; }
 
         [Required(ErrorMessage ="Enter Product Name")]
         [StringLength(20)]
@@ -25,9 +24,5 @@ namespace eCom.Core.Models
 
         public string Image { get; set; }
 
-        public Product()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
     }
 }

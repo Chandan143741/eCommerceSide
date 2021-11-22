@@ -11,13 +11,13 @@ namespace eCom.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
-        ProductRepository Context;
-        ProductCategoryRepository categoryRepository;
+        InMemoryRepository<Product> Context;
+        InMemoryRepository<ProductCategory> categoryRepository;
 
         public ProductManagerController()
         {
-            Context = new ProductRepository();
-            categoryRepository = new ProductCategoryRepository();
+            Context = new InMemoryRepository<Product>();
+            categoryRepository = new InMemoryRepository<ProductCategory>();
         }
 
         // GET: ProductManager
