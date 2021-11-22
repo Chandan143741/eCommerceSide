@@ -1,4 +1,5 @@
-﻿using eCom.Core.Models;
+﻿using eCom.Core.Contracts;
+using eCom.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace eCom.DataAccess.InMemory
 {
-    public class InMemoryRepository<T> where T : BaseEntity
+    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity
     {
         ObjectCache cache = MemoryCache.Default;
         List<T> items;
@@ -37,7 +38,7 @@ namespace eCom.DataAccess.InMemory
         public void Update(T t)
         {
             T tToUpdate = items.Find(x => x.Id == t.Id);
-            if(tToUpdate != null)
+            if (tToUpdate != null)
             {
                 tToUpdate = t;
             }
@@ -51,7 +52,7 @@ namespace eCom.DataAccess.InMemory
         {
             T t = items.Find(x => x.Id == Id);
 
-            if(t != null)
+            if (t != null)
             {
                 return t;
             }
@@ -70,7 +71,7 @@ namespace eCom.DataAccess.InMemory
         {
             T tToDelete = items.Find(x => x.Id == Id);
 
-            if(tToDelete != null)
+            if (tToDelete != null)
             {
                 items.Remove(tToDelete);
             }

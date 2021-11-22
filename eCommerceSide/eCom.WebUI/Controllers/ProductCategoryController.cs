@@ -1,4 +1,5 @@
-﻿using eCom.Core.Models;
+﻿using eCom.Core.Contracts;
+using eCom.Core.Models;
 using eCom.DataAccess.InMemory;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ namespace eCom.WebUI.Controllers
 {
     public class ProductCategoryController : Controller
     {
-        InMemoryRepository<ProductCategory> Context;
+        IRepository<ProductCategory> Context;
 
-        public ProductCategoryController()
+        public ProductCategoryController(IRepository<ProductCategory> repositoryContext)
         {
-            Context = new InMemoryRepository<ProductCategory>();
+            Context = repositoryContext;
         }
         // GET: ProductManager
         public ActionResult Index()

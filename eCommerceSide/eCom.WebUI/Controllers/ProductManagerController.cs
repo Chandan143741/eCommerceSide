@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using eCom.Core.Contracts;
 using eCom.Core.Models;
 using eCom.Core.ViewModels;
 using eCom.DataAccess.InMemory;
@@ -11,13 +12,13 @@ namespace eCom.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
-        InMemoryRepository<Product> Context;
-        InMemoryRepository<ProductCategory> categoryRepository;
+        IRepository<Product> Context;
+        IRepository<ProductCategory> categoryRepository;
 
-        public ProductManagerController()
+        public ProductManagerController(IRepository<Product> productContext, IRepository<ProductCategory> productcategoryRepository)
         {
-            Context = new InMemoryRepository<Product>();
-            categoryRepository = new InMemoryRepository<ProductCategory>();
+            Context = productContext;
+            categoryRepository = productcategoryRepository;
         }
 
         // GET: ProductManager
