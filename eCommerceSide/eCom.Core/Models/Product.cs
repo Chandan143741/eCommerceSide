@@ -17,7 +17,7 @@ namespace eCom.Core.Models
         [Required(ErrorMessage = "Enter Product Description")]
         public string Description { get; set; }
 
-        [Range(0,1000)]
+        [Range(0,10000)]
         public Decimal Price { get; set; }
 
         public string Category { get; set; }
