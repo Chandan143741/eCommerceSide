@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using eCom.Core.Contracts;
 using eCom.Core.Models;
+using eCom.Core.ViewModels;
 
 namespace eCom.WebUI.Controllers
 {
@@ -19,11 +20,25 @@ namespace eCom.WebUI.Controllers
             categoryRepository = productcategoryRepository;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string Category=null)
         {
             List<Product> products = Context.Collection().ToList();
+            List<ProductCategory> categories = categoryRepository.Collection().ToList();
 
-            return View(products);
+            if (Category == null)
+            {
+                products = Context.Collection().ToList();
+            }
+            else
+            {
+                products = Context.Collection().Where(p => p.Category == Category).ToList();
+            }
+
+            ProductListViewModel model = new ProductListViewModel();
+            model.Products = products;
+            model.ProductCategories = categories;
+
+            return View(model);
         }
 
         public ActionResult Details(string Id)

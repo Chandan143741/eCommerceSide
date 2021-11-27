@@ -1,4 +1,4 @@
-﻿@model IEnumerable<eCom.Core.Models.Product>
+﻿@model eCom.Core.ViewModels.ProductListViewModel
 @{
     ViewBag.Title = "Home Page";
 }
@@ -143,10 +143,17 @@
                         <!--Nav Button  -->
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">All</a>
-                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">New</a>
-                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Featured</a>
-                                <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">Offer</a>
+                                @Html.ActionLink("All", "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item" })
+
+                                @foreach (var cat in Model.ProductCategories)
+                                {
+                                    @Html.ActionLink(cat.Category, "Index", new { Category=cat.Category}, new { @class = Request["Category"] == cat.Category ? "list-group-item active" : "list-group-item" })
+                                }
+
+                                @*<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">All</a>
+                                  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">New</a>
+                                  <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Featured</a>
+                                  <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">Offer</a>*@
                             </div>
                         </nav>
                         <!--End Nav Button  -->
@@ -770,11 +777,11 @@
     <!-- Latest Products End -->
     <!-- Best Product Start -->
     <div class="best-product-area lf-padding">
-        <div class="product-wrapper bg-height" style="background-image: url('assets/img/categori/card.png')">
+        <div class="product-wrapper bg-height" style="background-image: url('/Content/Themes//img/categori/card.png')">
             <div class="container position-relative">
                 <div class="row justify-content-between align-items-end">
                     <div class="product-man position-absolute  d-none d-lg-block">
-                        <img src="assets/img/categori/card-man.png" alt="">
+                        <img src="~/Content/Themes/img/categori/card-man.png" alt="">
                     </div>
                     <div class="col-xl-2 col-lg-2 col-md-2 d-none d-lg-block">
                         <div class="vertical-text">
@@ -793,7 +800,7 @@
         </div>
         <!-- Shape -->
         <div class="shape bounce-animate d-none d-md-block">
-            <img src="assets/img/categori/card-shape.png" alt="">
+            <img src="~/Content/Themes/img/categori/card-shape.png" alt="">
         </div>
     </div>
     <!-- Best Product End-->
@@ -809,13 +816,13 @@
                         <a href="#" class="btn shop1-btn">Shop Now</a>
                     </div>
                     <div class="best-left-img mb-30 d-none d-sm-block">
-                        <img src="assets/img/collection/collection1.png" alt="">
+                        <img src="~/Content/Themes/img/collection/collection1.png" alt="">
                     </div>
                 </div>
                 <!-- Mid Img -->
                 <div class="col-xl-2 col-lg-2 d-none d-lg-block">
                     <div class="best-mid-img mb-30 ">
-                        <img src="assets/img/collection/collection2.png" alt="">
+                        <img src="~/Content/Themes/img/collection/collection2.png" alt="">
                     </div>
                 </div>
                 <!-- Riht Caption -->
@@ -826,7 +833,7 @@
                                 <h4>Menz Winter<br> Jacket</h4>
                             </div>
                             <div class="single-img">
-                                <img src="assets/img/collection/collection3.png" alt="">
+                                <img src="~/Content/Themes/img/collection/collection3.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -836,7 +843,7 @@
                                 <h4>Menz Winter<br>Jacket</h4>
                             </div>
                             <div class="single-img">
-                                <img src="assets/img/collection/collection4.png" alt="">
+                                <img src="~/Content/Themes/img/collection/collection4.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -846,7 +853,7 @@
                                 <h4>Menz Winter<br> Jacket</h4>
                             </div>
                             <div class="single-img">
-                                <img src="assets/img/collection/collection5.png" alt="">
+                                <img src="~/Content/Themes/img/collection/collection5.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -857,7 +864,7 @@
     <!-- Best Collection End -->
     <!-- Latest Offers Start -->
     <div class="latest-wrapper lf-padding">
-        <div class="latest-area latest-height d-flex align-items-center" data-background="assets/img/collection/latest-offer.png">
+        <div class="latest-area latest-height d-flex align-items-center" data-background="/Content/Themes/img/collection/latest-offer.png">
             <div class="container">
                 <div class="row d-flex align-items-center">
                     <div class="col-xl-5 col-lg-5 col-md-6 offset-xl-1 offset-lg-1">
@@ -878,7 +885,7 @@
             </div>
             <!-- man Shape -->
             <div class="man-shape">
-                <img src="assets/img/collection/latest-man.png" alt="">
+                <img src="~/Content/Themes/img/collection/latest-man.png" alt="">
             </div>
         </div>
     </div>
@@ -918,28 +925,25 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="gallery-items">
-                        <img src="assets/img/gallery/gallery1.jpg" alt="">
+                        <img src="~/Content/Themes/img/gallery/gallery1.jpg" alt="">
                     </div>
                     <div class="gallery-items">
-                        <img src="assets/img/gallery/gallery2.jpg" alt="">
+                        <img src="~/Content/Themes/img/gallery/gallery2.jpg" alt="">
                     </div>
                     <div class="gallery-items">
-                        <img src="assets/img/gallery/gallery3.jpg" alt="">
+                        <img src="~/Content/Themes/img/gallery/gallery3.jpg" alt="">
                     </div>
                     <div class="gallery-items">
-                        <img src="assets/img/gallery/gallery4.jpg" alt="">
+                        <img src="~/Content/Themes/img/gallery/gallery4.jpg" alt="">
                     </div>
                     <div class="gallery-items">
-                        <img src="assets/img/gallery/gallery5.jpg" alt="">
+                        <img src="~/Content/Themes/img/gallery/gallery5.jpg" alt="">
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Gallery End-->
-
-
-
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
