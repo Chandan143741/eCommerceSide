@@ -89,6 +89,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BasketControllerTest.cs" />
+    <Compile Include="Mocks\MockContext.cs" />
+    <Compile Include="Mocks\MockHttpContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -99,6 +102,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\eCom.Core\eCom.Core.csproj">
+      <Project>{624C588E-7997-4FB9-9FBC-D87EB1930E79}</Project>
+      <Name>eCom.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eCom.Services\eCom.Services.csproj">
+      <Project>{DF9EAE8C-5632-41AE-B882-8DCE0669E297}</Project>
+      <Name>eCom.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\eCom.WebUI\eCom.WebUI.csproj">
       <Project>{63193B44-73B8-44E8-BED3-715609C4C869}</Project>
       <Name>eCom.WebUI</Name>

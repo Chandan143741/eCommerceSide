@@ -1,4 +1,7 @@
-﻿using eCom.WebUI;
+﻿using eCom.Core.Contracts;
+using eCom.Core.Models;
+using eCom.Core.ViewModels;
+using eCom.WebUI;
 using eCom.WebUI.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -12,18 +15,24 @@ namespace eCom.WebUI.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
-        //[TestMethod]
-        //public void Index()
-        //{
-        //    // Arrange
-        //    HomeController controller = new HomeController();
+        [TestMethod]
+        public void IndexPage()
+        {
+            IRepository<Product> productContext = new Mocks.MockContext<Product>();
+            IRepository<ProductCategory> productCategoryContext = new Mocks.MockContext<ProductCategory>();
 
-        //    // Act
-        //    ViewResult result = controller.Index() as ViewResult;
+            productContext.Insert(new Product());
 
-        //    // Assert
-        //    Assert.IsNotNull(result);
-        //}
+            // Arrange
+            HomeController controller = new HomeController(productContext, productCategoryContext);
+
+            // Act
+            var result = controller.Index() as ViewResult;
+            var viewModel = (ProductListViewModel)result.ViewData.Model;
+
+            // Assert
+            Assert.AreEqual(1, viewModel.Products.Count());
+        }
 
         //[TestMethod]
         //public void About()
