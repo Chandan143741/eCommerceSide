@@ -1,4 +1,5 @@
 ﻿using eCom.Core.Contracts;
+using eCom.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,12 @@ namespace eCom.WebUI.Controllers
     public class BasketController : Controller
     {
         IBasketService basketService;
+        IOrderService orderService;
 
-        public BasketController(IBasketService BasketService)
+        public BasketController(IBasketService BasketService, IOrderService OrderService)
         {
             this.basketService = BasketService;
+            this.orderService = OrderService;
         }
 
         // GET: Basket
@@ -39,6 +42,30 @@ namespace eCom.WebUI.Controllers
         {
             var basket = basketService.GetBasketSummary(this.HttpContext);
             return PartialView(basket); 
+        }
+
+        public ActionResult CheckOut()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CheckOut(Order order)
+        {
+            var basketItems = basketService.GetBasketsItems(this.HttpContext);
+            order.OrderStatus = "Order Created";
+            //payment
+            order.OrderStatus = "Payment Processed";
+            orderService.CreateOrder(order, basketItems);
+            basketService.ClearBasket(this.HttpContext);
+
+            return RedirectToAction("Thankyou", new { OderId = order.Id });
+        }
+
+        public ActionResult Thankyou(string OrderId)
+        {
+            ViewBag.OrderId = OrderId;
+            return View();
         }
     }
 }
